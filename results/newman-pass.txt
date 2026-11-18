@@ -1,0 +1,129 @@
+newman
+
+Lab05 - Бүртгэлийн API систем тест
+
+❏ Идэвхтэй оюутан амжилттай бүртгүүлэх
+↳ Оюутан бэлтгэх
+  PUT http://localhost:3000/students/S01 [200 OK, 178B, 31ms]
+
+↳ Хичээл бэлтгэх
+  PUT http://localhost:3000/courses/C01 [200 OK, 178B, 4ms]
+
+↳ Идэвхтэй оюутан амжилттай бүртгүүлэх
+  POST http://localhost:3000/registrations [201 Created, 202B, 3ms]
+  ✓  Амжилттай бүртгэл
+  ✓  result=OK
+
+❏ Оюутан байхгүй
+↳ Хичээл бэлтгэх
+  PUT http://localhost:3000/courses/C02 [200 OK, 178B, 2ms]
+
+↳ Оюутан байхгүй
+  POST http://localhost:3000/registrations [200 OK, 192B, 3ms]
+  ✓  Оюутан байхгүй алдаа
+  ✓  result=ERROR_NO_STUDENT
+
+❏ Идэвхгүй оюутан
+↳ Оюутан бэлтгэх
+  PUT http://localhost:3000/students/S03 [200 OK, 178B, 2ms]
+
+↳ Хичээл бэлтгэх
+  PUT http://localhost:3000/courses/C03 [200 OK, 178B, 2ms]
+
+↳ Идэвхгүй оюутан
+  POST http://localhost:3000/registrations [200 OK, 198B, 2ms]
+  ✓  Идэвхгүй оюутны алдаа
+  ✓  result=ERROR_INACTIVE_STUDENT
+
+❏ Хичээл байхгүй
+↳ Оюутан бэлтгэх
+  PUT http://localhost:3000/students/S04 [200 OK, 178B, 3ms]
+
+↳ Хичээл байхгүй
+  POST http://localhost:3000/registrations [200 OK, 191B, 9ms]
+  ✓  Хичээл байхгүй алдаа
+  ✓  result=ERROR_NO_COURSE
+
+❏ Урьдач хичээл үзээгүй
+↳ Оюутан бэлтгэх
+  PUT http://localhost:3000/students/S05 [200 OK, 178B, 1ms]
+
+↳ Хичээл бэлтгэх
+  PUT http://localhost:3000/courses/C05 [200 OK, 178B, 1ms]
+
+↳ Урьдач хичээл үзээгүй
+  POST http://localhost:3000/registrations [200 OK, 215B, 2ms]
+  ✓  Урьдач нөхцөлийн алдаа
+  ✓  result=ERROR_PREREQUISITES
+
+❏ Хоёр урьдачийн нэг дутуу
+↳ Оюутан бэлтгэх
+  PUT http://localhost:3000/students/S06 [200 OK, 178B, 1ms]
+
+↳ Хичээл бэлтгэх
+  PUT http://localhost:3000/courses/C06 [200 OK, 178B, 1ms]
+
+↳ Хоёр урьдачийн нэг дутуу
+  POST http://localhost:3000/registrations [200 OK, 215B, 2ms]
+  ✓  Зарим урьдач дутуу
+  ✓  result=ERROR_PREREQUISITES
+
+❏ Урьдачгүй хичээл ба хоосон үзсэн жагсаалт
+↳ Оюутан бэлтгэх
+  PUT http://localhost:3000/students/S07 [200 OK, 178B, 1ms]
+
+↳ Хичээл бэлтгэх
+  PUT http://localhost:3000/courses/C07 [200 OK, 178B, 1ms]
+
+↳ Урьдачгүй хичээл ба хоосон үзсэн жагсаалт
+  POST http://localhost:3000/registrations [201 Created, 202B, 2ms]
+  ✓  Урьдачгүй хичээлийн бүртгэл
+  ✓  result=OK
+
+❏ studentID талбар дутуу
+↳ Оюутан бэлтгэх
+  PUT http://localhost:3000/students/S08 [200 OK, 178B, 0µs]
+
+↳ Хичээл бэлтгэх
+  PUT http://localhost:3000/courses/C08 [200 OK, 178B, 1ms]
+
+↳ studentID талбар дутуу
+  POST http://localhost:3000/registrations [400 Bad Request, 202B, 1ms]
+  ✓  studentID дутуу
+  ✓  result=ERROR_BAD_REQUEST
+
+❏ courseID талбар дутуу
+↳ Оюутан бэлтгэх
+  PUT http://localhost:3000/students/S09 [200 OK, 178B, 0µs]
+
+↳ Хичээл бэлтгэх
+  PUT http://localhost:3000/courses/C09 [200 OK, 178B, 0µs]
+
+↳ courseID талбар дутуу
+  POST http://localhost:3000/registrations [400 Bad Request, 202B, 1ms]
+  ✓  courseID дутуу
+  ✓  result=ERROR_BAD_REQUEST
+
+┌─────────────────────────┬─────────────────┬─────────────────┐
+│                         │        executed │          failed │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              iterations │               1 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│                requests │              25 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│            test-scripts │               9 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│      prerequest-scripts │               0 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              assertions │              18 │               0 │
+├─────────────────────────┴─────────────────┴─────────────────┤
+│ total run duration: 359ms                                   │
+├─────────────────────────────────────────────────────────────┤
+│ total data received: 564B (approx)                          │
+├─────────────────────────────────────────────────────────────┤
+│ average response time: 3ms [min: 1ms, max: 31ms, s.d.: 6ms] │
+└─────────────────────────────────────────────────────────────┘
+(node:66463) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+exit=0
